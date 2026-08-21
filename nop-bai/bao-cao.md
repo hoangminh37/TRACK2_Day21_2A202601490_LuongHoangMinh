@@ -44,13 +44,11 @@ Tập dữ liệu Adult Income bị mất cân bằng lớp nghiêm trọng khi 
 
 ## 3. Khó Khăn Gặp Phải và Cách Giải Quyết
 
-<!-- Nêu 2 - 3 khó khăn thật, mỗi ô một câu ngắn. -->
-
 | Khó khăn | Nguyên nhân | Cách giải quyết |
 |---|---|---|
-| ___ | ___ | ___ |
-| ___ | ___ | ___ |
-| ___ | ___ | ___ |
+| Lỗi unpickle mô hình khi khởi động FastAPI trên VM | Phiên bản scikit-learn trên VM cài mới nhất (1.7.2) không tương thích với bản train (1.4.2). | Cài đặt cố định chính xác scikit-learn==1.4.2 trên VM để đồng nhất môi trường. |
+| Xung đột cổng 5000 khi chạy MLflow UI trên macOS | Tính năng AirPlay Receiver của macOS mặc định chiếm dụng cổng 5000. | Chuyển MLflow UI sang cổng 5001 bằng cờ --port 5001. |
+| Đánh giá sai chất lượng mô hình do mất cân bằng lớp | Dữ liệu chỉ có 24.8% lớp dương khiến accuracy cao ảo dù mô hình vô dụng. | Thiết lập Quality Gate trên f1_score lớp dương (>= 0.65) thay vì accuracy. |
 
 ---
 
