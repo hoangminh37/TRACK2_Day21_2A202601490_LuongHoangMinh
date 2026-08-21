@@ -169,8 +169,4 @@ jobs:
           mkdir -p ~/.ssh
           echo "$SSH_KEY" > ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
-          ssh -o StrictHostKeyChecking=no -i ~/.ssh/deploy_key "$USER@$HOST" << 'EOF'
-            sudo systemctl restart income-api
-            sleep 5
-            curl -sf http://localhost:8080/healthz && echo "Health check passed." || exit 1
-          EOF
+          ssh -n -o StrictHostKeyChecking=no -i ~/.ssh/deploy_key "$USER@$HOST" "sudo systemctl restart income-api && sleep 5 && curl -sf http://localhost:8080/healthz && echo 'Health check passed.'"
