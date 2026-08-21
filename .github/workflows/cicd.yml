@@ -161,9 +161,11 @@ jobs:
       - name: SSH deploy to VM
         env:
           SSH_KEY: ${{ secrets.SERVER_SSH_KEY }}
-          HOST: ${{ secrets.SERVER_HOST }}
-          USER: ${{ secrets.SERVER_USER }}
+          RAW_HOST: ${{ secrets.SERVER_HOST }}
+          RAW_USER: ${{ secrets.SERVER_USER }}
         run: |
+          USER=$(echo "$RAW_USER" | tr -d '\r\n\t "')
+          HOST=$(echo "$RAW_HOST" | tr -d '\r\n\t "')
           mkdir -p ~/.ssh
           echo "$SSH_KEY" > ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
